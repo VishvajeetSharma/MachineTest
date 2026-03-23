@@ -1,3 +1,5 @@
+import { sendResponse } from "../utils/response.js";
+
 export const createUser = (req,res)=>{
-  res.send("working.....");
-}
+  sendResponse(res)
+} 
