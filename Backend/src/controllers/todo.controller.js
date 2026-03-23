@@ -35,3 +35,47 @@ export const getTodos = async (req, res) => {
     return sendResponse(res, false, 500, error.message || "Internal Server Error", [], true);
   }
 }
+
+export const updateTodo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, description, dueDate } = req.body;
+    const userId = req.user.userId;
+
+    if (!id) {
+      return sendResponse(res, false, 400, "Todo ID is required", [], true);
+    }
+
+    const updatedTodo = await TodoModel.findOneAndUpdate(
+      { _id: id, userId },
+      { title, description, dueDate },
+      { new: true }
+    );
+    if (!updatedTodo) {
+      return sendResponse(res, false, 404, "Todo not found", [], true);
+    }
+    return sendResponse(res, true, 200, "Todo updated successfully", updatedTodo, false);
+  }
+  catch (error) {
+    return sendResponse(res, false, 500, error.message || "Internal Server Error", [], true);
+  }
+}
+
+export const deleteTodo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.userId;
+
+    if (!id) {
+      return sendResponse(res, false, 400, "Todo ID is required", [], true);
+    }
+
+    const deletedTodo = await TodoModel.findOneAndDelete({ _id: id, userId });
+    if (!deletedTodo) {
+      return sendResponse(res, false, 404, "Todo not found", [], true);
+    }
+    return sendResponse(res, true, 200, "Todo deleted successfully", deletedTodo, false);
+  } catch (error) {
+    return sendResponse(res, false, 500, error.message || "Internal Server Error", [], true);
+  }
+}
