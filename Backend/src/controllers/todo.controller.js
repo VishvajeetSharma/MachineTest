@@ -46,9 +46,15 @@ export const updateTodo = async (req, res) => {
       return sendResponse(res, false, 400, "Todo ID is required", [], true);
     }
 
+    const newTodo = {
+      title,
+      description,
+      dueDate,
+    };
+
     const updatedTodo = await TodoModel.findOneAndUpdate(
       { _id: id, userId },
-      { title, description, dueDate },
+      newTodo,
       { new: true }
     );
     if (!updatedTodo) {
