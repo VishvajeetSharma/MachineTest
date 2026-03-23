@@ -3,5 +3,5 @@ export const isEmail =(email)=>{
 }
 
 export const isStrongPassword =(password)=>{
-  return password.length >= 6;
+  return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(password);
 }
