@@ -14,18 +14,10 @@ export const createTodo = async (req, res) => {
     };    
     
     const savedTodo = await TodoModel.create(newTodo);
-
     if(savedTodo){
       return sendResponse(res, true, 201, "Todo created successfully", savedTodo, false);
     }
-
   } catch (error) {
     return sendResponse(res, false, 500, error || "Internal Server Error", [], true);
   }
-  res.json({
-    title,
-    description,
-    dueDate,
-    userId
-  });
 }
