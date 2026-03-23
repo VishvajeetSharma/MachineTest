@@ -22,7 +22,7 @@ const todoSchema = new mongoose.Schema({
     type: String,
     required: [true, "Due date is required"],
   },
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },

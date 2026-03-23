@@ -35,7 +35,7 @@ export const createUser = async (req, res) => {
     }
 
   } catch (error) {
-    return sendResponse(res, false, 500, "Internal Server Error", [], true);
+    return sendResponse(res, false, 500, error.message || "Internal Server Error", [], true);
   }
 }
 
@@ -68,7 +68,7 @@ export const loginUser = async (req, res) => {
     sendResponse(res, true, 200, "User loged in successfully", { ...userObj, token }, false)
 
   } catch (error) {
-    return sendResponse(res, false, 500, "Internal Server Error", [], true);
+    return sendResponse(res, false, 500, error.message || "Internal Server Error", [], true);
 
   }
 }
