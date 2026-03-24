@@ -18,7 +18,6 @@ const App = () => {
         <Route path="/" element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
 
-
         <Route path="/create-task" element={<ProtectedRoute><CreateTask /></ProtectedRoute>} />
         <Route path="/view-task" element={<ProtectedRoute><ViewTask /></ProtectedRoute>} />
         <Route path="/update-task/:id" element={<ProtectedRoute><UpdateTask /></ProtectedRoute>} />

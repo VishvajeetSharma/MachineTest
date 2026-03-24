@@ -53,23 +53,30 @@ const Register = () => {
   };
 
   return (
-    <div className="row align-items-center py-5">
+    <div className="row align-items-center bg-white">
       <div className="col-sm-10 mx-auto">
         <div className="row">
-          {/* Left side form*/}
-          <div className="col-lg-6 col-10 mx-auto p-5 m-3 text-white my-second-bg rounded rounded-4">
-            <h1 className="access-title">Register Here</h1>
-            <p className="mt-3 access-subtext">
-              Enter your name, email, and password to create an account
-            </p>
+          {/* Left side image */}
+          <div className="col-lg-6 text-center mt-5 p-3 mt-lg-0">
+            <img
+              src="img/pic4.jpeg"
+              alt="illustration"
+              className="img-fluid access-img rounded rounded-4"
+            />
+          </div>
+
+          {/* Right side form*/}
+          <div className="col-lg-6 col-10 mx-auto p-5 m-5 bg-white text-dark">
+            <h1 className="access-title mb-4 fw-bold">
+              <span className="text-purple">Register</span> <span className="text-orange">Here!</span>
+            </h1>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-3">
-                <label className="form-label">Name *</label>
+              <div className="mb-4">
                 <input
                   type="text"
                   {...register("name")}
-                  className="form-control border-0"
+                  className="form-control custom-input"
                   placeholder="Enter your name"
                 />
                 {errors.name && (
@@ -77,12 +84,11 @@ const Register = () => {
                 )}
               </div>
 
-              <div className="mb-3">
-                <label className="form-label">Email *</label>
+              <div className="mb-4">
                 <input
                   type="email"
                   {...register("email")}
-                  className="form-control border-0"
+                  className="form-control custom-input"
                   placeholder="Enter your email"
                 />
                 {errors.email && (
@@ -90,12 +96,11 @@ const Register = () => {
                 )}
               </div>
 
-              <div className="mb-3">
-                <label className="form-label">Password *</label>
+              <div className="mb-4">
                 <input
                   type="password"
                   {...register("password")}
-                  className="form-control border-0"
+                  className="form-control custom-input"
                   placeholder="Enter your password"
                 />
                 {errors.password && (
@@ -105,19 +110,16 @@ const Register = () => {
                 )}
               </div>
 
-              <button className="btn btn-primary w-100 py-2 mt-4 fw-bold">
+              <button className="btn bg-purple w-100 py-2 mt-4 fw-bold">
                 Register
               </button>
+              
+              <div className="mt-3 text-start">
+                <small className="text-muted fw-bold">
+                  Already have an account? <a href="/" className="text-orange text-decoration-none">Login Here</a>
+                </small>
+              </div>
             </form>
-          </div>
-
-          {/* Right side image */}
-          <div className="col-lg-6 text-center mt-5 mt-lg-0">
-            <img
-              src="https://themes.stackbros.in/eduport_ng/assets/images/element/16.svg"
-              alt="illustration"
-              className="img-fluid access-img"
-            />
           </div>
         </div>
       </div>

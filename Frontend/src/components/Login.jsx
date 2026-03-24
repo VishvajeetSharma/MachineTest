@@ -52,34 +52,31 @@ const Login = () => {
   };
   return (
     <>
-      <div className="row align-items-center py-5 my-3 my-bg-dark">
+      <div className="row align-items-center my-3">
         <div className="col-sm-10 mx-auto">
           <div className="row">
             {/* Left side image */}
-            <div className="col-lg-6 text-center mt-5 mt-lg-0">
+            <div className="col-lg-6 text-center mt-lg-0">
               <img
-                src="https://themes.stackbros.in/eduport_ng/assets/images/element/16.svg"
+                src="img/pic3.jpeg"
                 alt="illustration"
                 className="img-fluid access-img"
               />
             </div>
 
             {/* Right side input  */}
-            <div className="col-lg-6 col-10 mx-auto m-3 p-5 text-white  my-second-bg rounded rounded-4">
-              <h1 className="access-title">Login Here</h1>
-
-              <p className="mt-3 access-subtext">
-                Enter your email address and password to get access
-              </p>
+            <div className="col-lg-6 col-10 mx-auto m-5 p-5  bg-white text-dark">
+              <h1 className="access-title fw-bold mb-4">
+                <span className="text-purple">Login</span> <span className="text-orange">Here!</span>
+              </h1>
 
               {/* INPUT */}
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-3">
-                  <label className="form-label">Email *</label>
+                <div className="mb-4">
                   <input
                     type="email"
                     {...register("email")}
-                    className="form-control border-0"
+                    className="form-control custom-input"
                     placeholder="Enter your email"
                   />
                   {errors.email && (
@@ -89,12 +86,11 @@ const Login = () => {
                   )}
                 </div>
 
-                <div className="mb-3">
-                  <label className="form-label">Password *</label>
+                <div className="mb-4">
                   <input
                     type="password"
                     {...register("password")}
-                    className="form-control border-0"
+                    className="form-control custom-input"
                     placeholder="Enter your password"
                   />
                   {errors.password && (
@@ -104,9 +100,14 @@ const Login = () => {
                   )}
                 </div>
 
-                <button className="btn btn-primary w-100 py-2 mt-4 fw-bold">
+                <button className="btn bg-purple w-100 py-2 mt-4 fw-bold">
                   Login
                 </button>
+                <div className="mt-3 text-start">
+                  <small className="text-muted fw-bold">
+                    Not have an account <a href="/register" className="text-orange text-decoration-none">Register Here</a>
+                  </small>
+                </div>
               </form>
             </div>
           </div>

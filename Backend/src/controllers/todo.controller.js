@@ -26,11 +26,34 @@ export const getTodos = async (req, res) => {
   try {
     const userId = req.user.userId;
 
-    const todos = await TodoModel.find({ userId }).sort({ createdAt: -1 });
-    if (!todos || todos.length === 0) {
-      return sendResponse(res, true, 200, "No todos found", [], false);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 8;
+    const skip = (page - 1) * limit;
+
+    const filter = { userId };
+    if (req.query.status && req.query.status !== "all") {
+      filter.status = req.query.status;
     }
-    return sendResponse(res, true, 200, "Todos fetched successfully", todos, false);
+
+    const totalItems = await TodoModel.countDocuments(filter);
+
+    const todos = await TodoModel.find(filter)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    const pagination = {
+      totalItems,
+      totalPages: Math.ceil(totalItems / limit),
+      currentPage: page,
+      pageSize: limit
+    };
+
+    if (!todos || todos.length === 0) {
+      return sendResponse(res, true, 200, "No todos found", { todos: [], pagination }, false);
+    }
+    
+    return sendResponse(res, true, 200, "Todos fetched successfully", { todos, pagination }, false);
   } catch (error) {
     return sendResponse(res, false, 500, error.message || "Internal Server Error", [], true);
   }

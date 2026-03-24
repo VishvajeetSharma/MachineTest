@@ -7,22 +7,25 @@ import {
 import { showAlert, showConfirm } from "../utils/showAlert.js";
 import { useNavigate } from "react-router-dom";
 import { storeData } from "../utils/manageData.js";
-import { MdDeleteForever } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
 
 const ViewTask = () => {
   const [todos, setTodos] = useState([]);
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [page, setPage] = useState(1);
+  const [pagination, setPagination] = useState({ totalPages: 1, totalItems: 0 });
   const navigate = useNavigate();
+  const limit = 8;
 
   useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [page, statusFilter]);
 
   const fetchTodos = async () => {
     try {
-      const data = await getTodosService();
+      const data = await getTodosService(page, limit, statusFilter);
       if (data?.success) {
-        setTodos(data.data); // assuming API returns { success, data }
+        setTodos(data.data.todos || []); 
+        setPagination(data.data.pagination || { totalPages: 1, totalItems: 0 });
       }
     } catch (error) {
       console.error("Error fetching todos:", error);
@@ -66,7 +69,18 @@ const ViewTask = () => {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-3 text-light text-center fw-bold fs-1">Todos List</h2>
+      <h1 className="access-title mb-4 fw-bold">
+              <span className="text-purple">ToDo</span>{" "}
+              <span className="text-orange">List!</span>
+            </h1>
+      <div className="mb-3 d-flex justify-content-end align-item-center gap-2">
+        <label className="fw-bold">Filter: </label>
+        <select className="form-select w-auto border-0 bg-light" value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}>
+          <option value="all">All</option>
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
       <table className="table table-bordered">
         <thead className="table-dark">
           <tr>
@@ -82,7 +96,7 @@ const ViewTask = () => {
           {todos.length > 0 ? (
             todos.map((todo, index) => (
               <tr key={todo._id}>
-                <td>{index + 1}</td>
+                <td>{(page - 1) * limit + index + 1}</td>
                 <td>{todo.title}</td>
                 <td>{todo.description}</td>
                 <td>
@@ -130,6 +144,25 @@ const ViewTask = () => {
           )}
         </tbody>
       </table>
+      {pagination.totalPages > 1 && (
+        <div className="d-flex justify-content-between align-items-center mt-3">
+          <button 
+            className="btn btn-primary px-4 fw-bold" 
+            disabled={page === 1}
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            Previous
+          </button>
+          <span className="text-light fw-bold">Page {page} of {pagination.totalPages}</span>
+          <button 
+            className="btn btn-primary px-4 fw-bold" 
+            disabled={page === pagination.totalPages}
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

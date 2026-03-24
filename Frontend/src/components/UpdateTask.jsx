@@ -7,6 +7,9 @@ import { updateTodoService } from "../services/task.service.js";
 import { getData, removeData } from "../utils/manageData.js";
 import { useEffect } from "react";
 
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
 const schema = yup.object().shape({
   title: yup
     .string()
@@ -23,7 +26,7 @@ const schema = yup.object().shape({
   dueDate: yup
     .date()
     .required("Due Date is required")
-    .min(new Date(), "Due Date cannot be in the past"),
+    .min(today, "Due Date cannot be in the past"),
 });
 
 const UpdateTask = () => {
@@ -64,37 +67,44 @@ const UpdateTask = () => {
   };
 
   return (
-    <div className="row align-items-center py-3">
+    <div className="row align-items-center py-3 bg-white">
       <div className="col-sm-10 mx-auto">
         <div className="row">
-          {/* Left side form */}
-          <div className="col-lg-6 col-10 mx-auto p-5 m-3 text-white my-second-bg rounded rounded-4">
-            <h1 className="access-title">Update Task</h1>
-            <p className="mt-3 access-subtext">
-              Enter task details to update an existing task
-            </p>
+          {/* Left side image */}
+          <div className="col-lg-6 p-3">
+            <img
+              src="/img/pic2.jpeg"
+              alt="illustration"
+              className="img-fluid"
+            />
+          </div>
+
+          {/* Right side form */}
+          <div className="col-lg-6 col-10 mx-auto p-5 m-5 bg-white text-dark">
+            <h1 className="access-title mb-4 fw-bold">
+              <span className="text-purple">Update</span>{" "}
+              <span className="text-orange">ToDo!</span>
+            </h1>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-3">
-                <label className="form-label">Title *</label>
+              <div className="mb-4">
                 <input
                   type="text"
                   {...register("title")}
-                  className="form-control border-0"
-                  placeholder="Enter task title"
+                  className="form-control custom-input"
+                  placeholder="Enter your task name"
                 />
                 {errors.title && (
                   <small className="text-danger">{errors.title.message}</small>
                 )}
               </div>
 
-              <div className="mb-3">
-                <label className="form-label">Description *</label>
+              <div className="mb-4">
                 <textarea
                   {...register("description")}
-                  className="form-control border-0"
+                  className="form-control custom-input"
                   placeholder="Enter task description"
-                  rows={4}
+                  rows={2}
                 />
                 {errors.description && (
                   <small className="text-danger">
@@ -103,12 +113,11 @@ const UpdateTask = () => {
                 )}
               </div>
 
-              <div className="mb-3">
-                <label className="form-label">Due Date *</label>
+              <div className="mb-4">
                 <input
                   type="date"
                   {...register("dueDate")}
-                  className="form-control border-0"
+                  className="form-control custom-input text-muted"
                 />
                 {errors.dueDate && (
                   <small className="text-danger">
@@ -117,19 +126,10 @@ const UpdateTask = () => {
                 )}
               </div>
 
-              <button className="btn btn-primary w-100 py-2 mt-4 fw-bold">
-                Update Task
+              <button className="btn bg-purple w-100 py-2 mt-4 fw-bold">
+                Update
               </button>
             </form>
-          </div>
-
-          {/* Right side image */}
-          <div className="col-lg-6 text-center mt-5 pt-5 mt-lg-0">
-            <img
-              src="https://themes.stackbros.in/eduport_ng/assets/images/element/16.svg"
-              alt="illustration"
-              className="img-fluid access-img"
-            />
           </div>
         </div>
       </div>

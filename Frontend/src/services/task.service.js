@@ -21,9 +21,9 @@ export const updateTodoService = async (id, data) => {
   return res?.data;
 };
 
-export const getTodosService = async () => {
+export const getTodosService = async (page = 1, limit = 10, status = "all") => {
   const token = getToken();
-  const res = await axios.get(`${BASE_URL}/todo/get-todos`, {
+  const res = await axios.get(`${BASE_URL}/todo/get-todos?page=${page}&limit=${limit}&status=${status}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return res?.data;
