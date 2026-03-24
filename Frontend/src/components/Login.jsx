@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { userLoginService } from "../services/user.service.js";
 import { showAlert } from "../utils/showAlert.js";
 import { storeData } from "../utils/manageData.js";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context.jsx";
 
 const schema = yup.object().shape({
   email: yup
@@ -23,6 +25,7 @@ const schema = yup.object().shape({
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setToken } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -36,8 +39,8 @@ const Login = () => {
     try {
       const res = await userLoginService(data);
       if (res.success) {
-        showAlert("User Login", res?.message, "success");
         storeData("token", res?.data?.token);
+        setToken(res?.data?.token);
         reset();
         navigate("/view-task");
       } else {

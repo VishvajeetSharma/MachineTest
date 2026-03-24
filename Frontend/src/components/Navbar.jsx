@@ -1,15 +1,18 @@
-
 import { NavLink } from "react-router-dom";
 import { getData } from "../utils/manageData.js";
+import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context.jsx";
 
 const Navbar = () => {
-const token = getData("token");
+
+  const { token } = useContext(AuthContext);
 
   const menuItems = token
     ? [
-      { path: "/view-task", text: "View Tasks" },
+        { path: "/view-task", text: "View Tasks" },
         { path: "/create-task", text: "Create Task" },
-        { path: "/logout", text: "Logout" }
+        { path: "/logout", text: "Logout" },
       ]
     : [
         { path: "/", text: "Login" },
