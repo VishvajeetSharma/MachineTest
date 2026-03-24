@@ -7,9 +7,8 @@ const token = getData("token");
 
   const menuItems = token
     ? [
+      { path: "/view-task", text: "View Tasks" },
         { path: "/create-task", text: "Create Task" },
-        { path: "/view-task", text: "View Tasks" },
-        { path: "/update-task", text: "Update Task" },
         { path: "/logout", text: "Logout" }
       ]
     : [
