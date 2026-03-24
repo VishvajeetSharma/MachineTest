@@ -36,3 +36,12 @@ export const deleteTodoService = async (id) => {
   });
   return res?.data;
 };
+
+export const updateStatusService = async (id) => {
+  const token = getToken();
+  const data = { status: "completed" }; 
+  const res = await axios.patch(`${BASE_URL}/todo/update-todo-status/${id}`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res?.data;
+};

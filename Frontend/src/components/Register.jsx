@@ -41,14 +41,14 @@ const Register = () => {
     try {
       const res = await userRegisterService(data);
       if (res.success) {
-        showAlert("User Regiser", res?.message, "success");
+        showAlert("User Registration", res?.message, "success");
         reset();
         navigate("/");
       } else {
-        showAlert("User Regiser", res?.message, "error");
+        showAlert("User Registration", res?.message, "error");
       }
     } catch (error) {
-      showAlert("User Regiser", "Internal Server error", "error");
+      showAlert("User Registration", "Internal Server Error", "error");
     }
   };
 
@@ -57,7 +57,7 @@ const Register = () => {
       <div className="col-sm-10 mx-auto">
         <div className="row">
           {/* Left side form*/}
-          <div className="col-sm-6 col-10 mx-auto p-5 m-3 text-white my-second-bg rounded rounded-4">
+          <div className="col-lg-6 col-10 mx-auto p-5 m-3 text-white my-second-bg rounded rounded-4">
             <h1 className="access-title">Register Here</h1>
             <p className="mt-3 access-subtext">
               Enter your name, email, and password to create an account

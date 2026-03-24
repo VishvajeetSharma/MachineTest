@@ -39,7 +39,7 @@ const Login = () => {
         showAlert("User Login", res?.message, "success");
         storeData("token", res?.data?.token);
         reset();
-        navigate("/");
+        navigate("/view-task");
       } else {
         showAlert("User Login", res?.message, "error");
       }
@@ -53,7 +53,7 @@ const Login = () => {
         <div className="col-sm-10 mx-auto">
           <div className="row">
             {/* Left side image */}
-            <div className="col-sm-6 text-center mt-5 mt-lg-0">
+            <div className="col-lg-6 text-center mt-5 mt-lg-0">
               <img
                 src="https://themes.stackbros.in/eduport_ng/assets/images/element/16.svg"
                 alt="illustration"
@@ -62,7 +62,7 @@ const Login = () => {
             </div>
 
             {/* Right side input  */}
-            <div className="col-sm-6 col-10 mx-auto m-3 p-5 text-white  my-second-bg rounded rounded-4">
+            <div className="col-lg-6 col-10 mx-auto m-3 p-5 text-white  my-second-bg rounded rounded-4">
               <h1 className="access-title">Login Here</h1>
 
               <p className="mt-3 access-subtext">

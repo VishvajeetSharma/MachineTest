@@ -20,7 +20,7 @@ const token = getData("token");
     <nav className="navbar navbar-expand-lg my-first-bg">
       <div className="container">
         <NavLink className="navbar-brand text-light fs-3 fw-bold" to="/">
-          Task
+          TaskMaster
         </NavLink>
 
         <button

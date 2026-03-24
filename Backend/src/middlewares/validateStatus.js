@@ -1,6 +1,6 @@
 import { sendResponse } from "../utils/response.js";
 
-const allowedStatuses = ["pending", "in-progress", "completed"];
+const allowedStatuses = ["pending", "completed"];
 
 const validateStatus = (req, res, next) => {
   const { status } = req.body;
