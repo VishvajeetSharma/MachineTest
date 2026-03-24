@@ -1,6 +1,4 @@
 import { NavLink } from "react-router-dom";
-import { getData } from "../utils/manageData.js";
-import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context.jsx";
 
