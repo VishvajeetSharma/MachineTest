@@ -3,5 +3,5 @@ export const isEmail =(email)=>{
 }
 
 export const isStrongPassword =(password)=>{
-  return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(password);
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,15}$/.test(password);
 }

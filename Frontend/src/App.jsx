@@ -5,6 +5,7 @@ import CreateTask from "./components/CreateTask";
 import ViewTask from "./components/ViewTask";
 import UpdateTask from "./components/UpdateTask";
 import Navbar from "./components/Navbar";
+import LogOut from "./components/LogOut";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/create-task" element={<CreateTask />} />
         <Route path="/view-task" element={<ViewTask />} />
         <Route path="/update-task" element={<UpdateTask />} />
+        <Route path="/logout" element={<LogOut />} />
       </Routes>
     </>
   );

@@ -1,24 +1,31 @@
 
 import { NavLink } from "react-router-dom";
+import { getData } from "../utils/manageData.js";
 
 const Navbar = () => {
-  const menuItems = [
-  { path: "/", text: "Login" },
-  { path: "/register", text: "Register" },
-  { path: "/create-task", text: "Create Task" },
-  { path: "/view-task", text: "View Tasks" },
-  { path: "/update-task", text: "Update Task" }
-];
+const token = getData("token");
+
+  const menuItems = token
+    ? [
+        { path: "/create-task", text: "Create Task" },
+        { path: "/view-task", text: "View Tasks" },
+        { path: "/update-task", text: "Update Task" },
+        { path: "/logout", text: "Logout" }
+      ]
+    : [
+        { path: "/", text: "Login" },
+        { path: "/register", text: "Register" },
+      ];
 
   return (
-    <nav className="navbar navbar-expand-lg bg-dark my-second-bg-dark">
+    <nav className="navbar navbar-expand-lg my-first-bg">
       <div className="container">
         <NavLink className="navbar-brand text-light fs-3 fw-bold" to="/">
           Task
         </NavLink>
 
         <button
-          className="navbar-toggler text-light"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -26,9 +33,7 @@ const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon" style={{ lineHeight: 1 }}>
-            ☰
-          </span>
+          <span className="navbar-toggler-icon"></span>
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">

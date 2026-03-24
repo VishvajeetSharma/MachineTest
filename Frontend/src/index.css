@@ -1,0 +1,13 @@
+body{
+  overflow-x: hidden;
+  background-color: rgba(68, 61, 61, 0.75) !important;
+}
+
+.my-first-bg{
+  background-color: rgba(68, 61, 61, 0.899) !important;
+}
+
+.my-second-bg{
+  background-color: rgba(68, 61, 61, 0.75) !important;
+}
+
