@@ -28,10 +28,12 @@ const validateTodo = (req, res, next) => {
     return sendResponse(res, false, 400, "Due date cannot be in the past", [], true);
   }
 
+  const normalizedDate = parsedDate.toISOString().split('T')[0];
+
   req.body = {
     title: title.trim(),
     description: description.trim(),
-    dueDate: parsedDate
+    dueDate: normalizedDate
   };
 
   next();

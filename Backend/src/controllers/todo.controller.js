@@ -85,3 +85,31 @@ export const deleteTodo = async (req, res) => {
     return sendResponse(res, false, 500, error.message || "Internal Server Error", [], true);
   }
 }
+
+
+export const updateStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    const userId = req.user.userId;
+
+    if (!id) {
+      return sendResponse(res, false, 400, "Todo ID is required", [], true);
+    }
+
+    const updatedTodo = await TodoModel.findOneAndUpdate(
+      { _id: id, userId },
+      { $set: { status } },
+      { new: true }
+    );
+
+    if (!updatedTodo) {
+      return sendResponse(res, false, 404, "Todo not found", [], true);
+    }
+
+    return sendResponse(res, true, 200, "Todo status updated successfully", updatedTodo, false);
+  } catch (error) {
+    return sendResponse(res, false, 500, error.message || "Internal Server Error", [], true);
+  }
+};
+
